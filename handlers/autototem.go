@@ -31,4 +31,3 @@ func (h *AutoTotemHandler) HandleServerPacket(pk packet.Packet) bool {
 func (h *AutoTotemHandler) triggerTotemSwap() {
 	// Logika swap totem
 }
-}
