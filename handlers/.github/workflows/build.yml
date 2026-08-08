@@ -1,0 +1,29 @@
+name: Build Go Tool
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build Executable
+        run: |
+          go build -v -o bedrocktools .
+
+      - name: Upload Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrocktools-binary
+          path: bedrocktools
+          
