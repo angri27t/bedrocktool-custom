@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -19,7 +21,7 @@ jobs:
 
       - name: Build Executable
         run: |
-          go build -v -o bedrocktools ./cmd/... || go run build.go || go build -v -o bedrocktools .
+          go run build.go || go build -v -o bedrocktools ./cmd/... || go build -v -o bedrocktools .
 
       - name: Upload Result
         uses: actions/upload-artifact@v4
