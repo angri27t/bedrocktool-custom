@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"github.com/sandertv/gophertunnel/minecraft/protocol"
 	"github.com/sandertv/gophertunnel/minecraft/protocol/packet"
 )
 
@@ -13,7 +12,6 @@ func NewAutoTotemHandler() *AutoTotemHandler {
 	return &AutoTotemHandler{Enabled: true}
 }
 
-// HandleServerPacket mencegat paket dari server untuk memantau status darah/inventaris
 func (h *AutoTotemHandler) HandleServerPacket(pk packet.Packet) bool {
 	if !h.Enabled {
 		return true
@@ -21,10 +19,8 @@ func (h *AutoTotemHandler) HandleServerPacket(pk packet.Packet) bool {
 
 	switch p := pk.(type) {
 	case *packet.UpdateAttributes:
-		// Mendeteksi perubahan health player
 		for _, attr := range p.Attributes {
 			if attr.Name == "minecraft:health" && attr.Value <= 6.0 {
-				// Memicu aksi swap totem saat HP kritis
 				h.triggerTotemSwap()
 			}
 		}
@@ -33,5 +29,6 @@ func (h *AutoTotemHandler) HandleServerPacket(pk packet.Packet) bool {
 }
 
 func (h *AutoTotemHandler) triggerTotemSwap() {
-	// Logika pengiriman paket swap item di Proxy
+	// Logika swap totem
+}
 }
